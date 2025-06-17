@@ -1,0 +1,19 @@
+services:
+  ml-service:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./chroma_db:/app/chroma_db
+    environment:
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+    depends_on:
+      - chroma
+  
+  chroma:
+    image: chromadb/chroma:latest
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./chroma_data:/chroma/chroma
