@@ -93,7 +93,7 @@ POST /generate
 **Request Body:**
 ```json
 {
-  "topic": "electronics",
+  "topic": "Jackets",
   "num_rows": 5
 }
 ```
@@ -102,7 +102,34 @@ POST /generate
 ```json
 {
   "status": "success",
-  "count": 5
+  "count": 5,
+  "Generated data ": [
+    {
+      "Product_Name": "Everest Puffer Jacket",
+      "Review": "This jacket is incredibly warm and lightweight! Perfect for cold winter mornings. The hood is a great addition, and it packs down surprisingly small. Highly recommend for anyone needing serious warmth.",
+      "Sentiment": "Positive"
+    },
+    {
+      "Product_Name": "Urban Commuter Raincoat",
+      "Review": "Disappointed with this raincoat. It claims to be waterproof, but after walking in moderate rain for 15 minutes, my shirt was damp. The zipper also feels flimsy and gets stuck often. Not worth the price.",
+      "Sentiment": "Negative"
+    },
+    {
+      "Product_Name": "Summit Trekker Fleece",
+      "Review": "A decent fleece jacket for the price. It's soft and provides good layering warmth for hiking. The pockets are a nice size. It's not the most stylish, but it gets the job done for outdoor activities.",
+      "Sentiment": "Neutral"
+    },
+    {
+      "Product_Name": "Classic Denim Jacket",
+      "Review": "Absolutely love this classic denim jacket! The fit is perfect, not too tight or too baggy. It's become my go-to for casual outings and adds a cool touch to any outfit. The denim feels durable and soft after a few washes.",
+      "Sentiment": "Positive"
+    },
+    {
+      "Product_Name": "Voyager Windbreaker",
+      "Review": "This windbreaker is okay, but not amazing. It blocks wind effectively, but the breathability isn't great, so I tend to get sweaty quickly during active use. The sizing also runs a bit small, so consider sizing up.",
+      "Sentiment": "Neutral"
+    }
+  ]
 }
 ```
 
@@ -114,8 +141,8 @@ POST /search
 **Request Body:**
 ```json
 {
-  "topic": "electronics",
-  "query_text": "great sound quality",
+  "topic": "Jackets",
+  "query_text": "Warm and Cozy",
   "top_k": 2
 }
 ```
@@ -125,16 +152,16 @@ POST /search
 {
   "results": [
     {
-      "document": "These headphones have incredible sound quality with deep bass and crystal clear highs. Perfect for music lovers who want premium audio experience.",
-      "product_name": "SoundMaster Pro",
-      "sentiment": "Positive",
-      "distance": 0.6175824403762817
+      "document": "A decent fleece jacket for the price. It's soft and provides good layering warmth for hiking. The pockets are a nice size. It's not the most stylish, but it gets the job done for outdoor activities.",
+      "product_name": "Summit Trekker Fleece",
+      "sentiment": "Neutral",
+      "distance": 0.5914355516433716
     },
     {
-      "document": "Amazing audio clarity and the bass response is phenomenal. These are by far the best headphones I've ever owned for the price range.",
-      "product_name": "AudioElite 500",
+      "document": "This jacket is incredibly warm and lightweight! Perfect for cold winter mornings. The hood is a great addition, and it packs down surprisingly small. Highly recommend for anyone needing serious warmth.",
+      "product_name": "Everest Puffer Jacket",
       "sentiment": "Positive",
-      "distance": 0.6949067115783691
+      "distance": 0.5925547480583191
     }
   ]
 }
@@ -242,15 +269,15 @@ llm = init_chat_model("openai:gpt-3.5-turbo")
 ## File Structure
 
 ```
+service/
+├── api.py               # FastAPI application and endpoints
+└── main.py              # LangGraph workflow and core logic
 ├── .env                 # Environment variables (create from .env.example)
 ├── .env.example         # Environment variables template
 ├── .gitignore           # Git ignore rules
-├── .python-version      # Python version specification
-├── api.py               # FastAPI application and endpoints
 ├── docker               # Docker configuration
 ├── docker-compose.yml   # Docker deployment configuration
 ├── Dockerfile           # Container build instructions
-├── main.py              # LangGraph workflow and core logic
 ├── pyproject.toml       # Python project configuration
 ├── README.md            # Project documentation
 ├── requirements.txt     # Python dependencies
